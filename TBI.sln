@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBI", "TBI\TBI.csproj", "{D1C715D7-4959-4F31-89B5-33DE49976785}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		TBIRelease|Any CPU = TBIRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.TBIRelease|Any CPU.ActiveCfg = TBIRelease|Any CPU
+		{D1C715D7-4959-4F31-89B5-33DE49976785}.TBIRelease|Any CPU.Build.0 = TBIRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CE58271-D94F-47E2-8E7B-90DD30F4C1E9}
+	EndGlobalSection
+EndGlobal

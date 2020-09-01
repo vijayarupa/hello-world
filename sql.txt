@@ -1,0 +1,428 @@
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- --------------------------------------------------
+-- Date Created: 05/12/2020 10:48:03
+-- Generated from EDMX file: C:\TBI\TBI\Models\TBIModel.edmx
+-- --------------------------------------------------
+
+SET QUOTED_IDENTIFIER OFF;
+GO
+USE [TBIEmployee];
+GO
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+GO
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[FK__Consent__ID__31EC6D26]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Consent] DROP CONSTRAINT [FK__Consent__ID__31EC6D26];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Dep__ID__73BA3083]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Dep] DROP CONSTRAINT [FK__Dep__ID__73BA3083];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Deployment__ID__02FC7413]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Deployment] DROP CONSTRAINT [FK__Deployment__ID__02FC7413];
+GO
+IF OBJECT_ID(N'[dbo].[FK__DRFNICoE__ID__398D8EEE]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DRFNICoE] DROP CONSTRAINT [FK__DRFNICoE__ID__398D8EEE];
+GO
+IF OBJECT_ID(N'[dbo].[FK__DRFNICoE__ID__412EB0B6]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DRFNICoE] DROP CONSTRAINT [FK__DRFNICoE__ID__412EB0B6];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Imaging__ID__160F4887]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Imaging] DROP CONSTRAINT [FK__Imaging__ID__160F4887];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Imaging__ID__17036CC0]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Imaging] DROP CONSTRAINT [FK__Imaging__ID__17036CC0];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DBProtocol] DROP CONSTRAINT [FK_PersonOrder];
+GO
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[Consent]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Consent];
+GO
+IF OBJECT_ID(N'[dbo].[DBProtocol]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DBProtocol];
+GO
+IF OBJECT_ID(N'[dbo].[Dep]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Dep];
+GO
+IF OBJECT_ID(N'[dbo].[Deployment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Deployment];
+GO
+IF OBJECT_ID(N'[dbo].[DRFNICoE]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DRFNICoE];
+GO
+IF OBJECT_ID(N'[dbo].[Imaging]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Imaging];
+GO
+IF OBJECT_ID(N'[dbo].[Persons]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Persons];
+GO
+IF OBJECT_ID(N'[dbo].[SOAP]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SOAP];
+GO
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'Consents'
+CREATE TABLE [dbo].[Consents] (
+    [ConsentID] int IDENTITY(1,1) NOT NULL,
+    [ID] int  NOT NULL,
+    [ConID] int  NOT NULL,
+    [StudyType] nvarchar(50)  NOT NULL,
+    [SType] nvarchar(50)  NOT NULL,
+    [ScreenedDate] datetime  NOT NULL,
+    [Eligible] bit  NOT NULL,
+    [EligibilityComments] varchar(max)  NULL,
+    [ReasonForExclusion] varchar(max)  NULL,
+    [ApproachedDate] datetime  NOT NULL,
+    [ConsentDate] datetime  NOT NULL,
+    [Comments] varchar(max)  NULL,
+    [Consented] bit  NOT NULL,
+    [Declined] bit  NOT NULL,
+    [Withdraw] bit  NOT NULL,
+    [ConsentComments] varchar(max)  NULL,
+    [DatePhoned] datetime  NOT NULL,
+    [FollowupComments] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'Deps'
+CREATE TABLE [dbo].[Deps] (
+    [DID] int IDENTITY(1,1) NOT NULL,
+    [ID] int  NOT NULL,
+    [DeID] int  NOT NULL,
+    [Year] int  NOT NULL,
+    [InjuryType] nvarchar(50)  NOT NULL,
+    [IType] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'Persons'
+CREATE TABLE [dbo].[Persons] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [LastName] varchar(255)  NOT NULL,
+    [FirstName] varchar(255)  NULL,
+    [Age] int  NULL,
+    [Email] varchar(255)  NULL,
+    [City] varchar(255)  NULL,
+    [State] varchar(255)  NULL
+);
+GO
+
+-- Creating table 'Deployments'
+CREATE TABLE [dbo].[Deployments] (
+    [DeploymentID] int IDENTITY(1,1) NOT NULL,
+    [ID] int  NOT NULL,
+    [DepID] int  NOT NULL,
+    [Month] nvarchar(50)  NOT NULL,
+    [Year] nvarchar(50)  NOT NULL,
+    [Duration] nvarchar(50)  NOT NULL,
+    [Location] nvarchar(250)  NULL,
+    [InjuryDate] datetime  NOT NULL,
+    [DateComment] datetime  NOT NULL,
+    [OIFOEF] nvarchar(50)  NOT NULL,
+    [InjuryType] nvarchar(50)  NOT NULL,
+    [IType] varchar(max)  NULL,
+    [Loc] bit  NOT NULL,
+    [LocDuration] nvarchar(150)  NULL,
+    [PTA] nvarchar(50)  NULL,
+    [PTADuration] nvarchar(150)  NULL,
+    [AOC] bit  NOT NULL,
+    [AOCDuration] nvarchar(150)  NULL,
+    [MostSignificant] nvarchar(150)  NULL,
+    [SiteOfInjury] varchar(max)  NULL,
+    [Background] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'DBProtocols'
+CREATE TABLE [dbo].[DBProtocols] (
+    [DBProtocolID] int IDENTITY(1,1) NOT NULL,
+    [StudyID] int  NOT NULL,
+    [ID] int  NOT NULL,
+    [DateofConsent] datetime  NOT NULL,
+    [TypeofParticipant] nvarchar(max)  NOT NULL,
+    [Withdraw] nvarchar(max)  NOT NULL,
+    [DateofWithdraw] datetime  NOT NULL,
+    [WithdrawComments] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'DRFNICoEs'
+CREATE TABLE [dbo].[DRFNICoEs] (
+    [DRFID] int IDENTITY(1,1) NOT NULL,
+    [ID] int  NOT NULL,
+    [DID] int  NOT NULL,
+    [Name] nvarchar(250)  NOT NULL,
+    [ContactNumber] nvarchar(50)  NOT NULL,
+    [Department] nvarchar(250)  NOT NULL,
+    [EmailAddress] nvarchar(255)  NULL,
+    [DescofDataReq] nvarchar(max)  NULL,
+    [Purpose] bit  NOT NULL,
+    [PProtocolNumber] nvarchar(250)  NULL,
+    [PProtocolName] nvarchar(250)  NULL,
+    [FormateRequired] bit  NOT NULL,
+    [FormateRequired1] nvarchar(250)  NULL,
+    [DataIdentifiers] nvarchar(250)  NULL,
+    [DataAnalysis] nvarchar(250)  NULL,
+    [Signature] nvarchar(250)  NULL,
+    [SDate] datetime  NOT NULL,
+    [ARApprovedBy] nvarchar(250)  NULL,
+    [ARSignature] nvarchar(250)  NULL,
+    [Section] nvarchar(50)  NOT NULL,
+    [RIPDateReceived] datetime  NOT NULL,
+    [RIPDateReturned] datetime  NOT NULL,
+    [RIPComments] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'SOAPs'
+CREATE TABLE [dbo].[SOAPs] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [DTime] datetime  NOT NULL,
+    [SessionNumber] varchar(max)  NOT NULL,
+    [LastName] varchar(max)  NOT NULL,
+    [FirstName] varchar(max)  NOT NULL,
+    [MiddleName] varbinary(max)  NULL,
+    [Age] int  NOT NULL,
+    [MilitaryAffiliation] varchar(max)  NOT NULL,
+    [Rank] nvarchar(max)  NULL,
+    [Service] nvarchar(max)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [Phone] nvarchar(max)  NULL,
+    [CaseManager] nvarchar(max)  NULL,
+    [CurrentLivingSituation] nvarchar(max)  NULL,
+    [LearningStyle] nvarchar(max)  NULL,
+    [BarrierstoLearning] nvarchar(50)  NULL,
+    [PatientGoal] nvarchar(50)  NULL,
+    [FallRisks] nvarchar(50)  NULL,
+    [Precautions] nvarchar(max)  NULL,
+    [OtherTherapiesAttended] nvarchar(max)  NULL,
+    [History] nvarchar(max)  NULL,
+    [FamilyBackgroundSocialSupport] nvarchar(max)  NULL,
+    [Highestlevelofeducation] nvarchar(max)  NULL,
+    [EducationPerformance] nvarchar(max)  NULL,
+    [LearningdisabilityADHD] nvarchar(max)  NULL,
+    [Plansforfutureeducation] nvarchar(max)  NULL,
+    [LeisureHistory] nvarchar(max)  NULL,
+    [HPIReasonforReferral] nvarchar(max)  NULL,
+    [TreatingClinician] nvarchar(max)  NULL,
+    [SubjReportpreorpostveteranspainscale] nvarchar(max)  NULL,
+    [Hoursofsleep] nvarchar(max)  NULL,
+    [Sleepquality] nvarchar(max)  NULL,
+    [ParticipantReportedFeelingsaboutDay] nvarchar(max)  NULL,
+    [HygieneAppearance] nvarchar(max)  NULL,
+    [Insigh] nvarchar(max)  NULL,
+    [Judgment] nvarchar(max)  NULL,
+    [EyeContact] nvarchar(max)  NULL,
+    [SpeechPatterns] nvarchar(max)  NULL,
+    [Affect] nvarchar(max)  NULL,
+    [ThoughtPattern] nvarchar(max)  NULL,
+    [Comments] nvarchar(max)  NULL,
+    [ODuration] nvarchar(max)  NULL,
+    [OCPTcode] nvarchar(max)  NULL,
+    [CREVIEW] nvarchar(max)  NULL,
+    [CNEW] nvarchar(max)  NULL,
+    [CmdReview] nvarchar(max)  NULL,
+    [CmdNew] nvarchar(max)  NULL,
+    [Environment] nvarchar(max)  NULL,
+    [Conditions] nvarchar(max)  NULL,
+    [Educationprovided] nvarchar(max)  NULL,
+    [ObjComments] nvarchar(max)  NULL,
+    [Assessment] nvarchar(max)  NULL,
+    [Plan] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'Imagings'
+CREATE TABLE [dbo].[Imagings] (
+    [ImagingID] int IDENTITY(1,1) NOT NULL,
+    [ID] int  NOT NULL,
+    [ImagID] int  NOT NULL,
+    [ImageDate] datetime  NULL,
+    [Type] nvarchar(50)  NOT NULL,
+    [IType] varchar(max)  NULL,
+    [Location] nvarchar(max)  NULL,
+    [ScanAtNICoE] bit  NOT NULL,
+    [UsableImage] bit  NOT NULL,
+    [Findings] bit  NOT NULL,
+    [FindingsNote] varchar(max)  NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [ConsentID] in table 'Consents'
+ALTER TABLE [dbo].[Consents]
+ADD CONSTRAINT [PK_Consents]
+    PRIMARY KEY CLUSTERED ([ConsentID] ASC);
+GO
+
+-- Creating primary key on [DID] in table 'Deps'
+ALTER TABLE [dbo].[Deps]
+ADD CONSTRAINT [PK_Deps]
+    PRIMARY KEY CLUSTERED ([DID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Persons'
+ALTER TABLE [dbo].[Persons]
+ADD CONSTRAINT [PK_Persons]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [DeploymentID] in table 'Deployments'
+ALTER TABLE [dbo].[Deployments]
+ADD CONSTRAINT [PK_Deployments]
+    PRIMARY KEY CLUSTERED ([DeploymentID] ASC);
+GO
+
+-- Creating primary key on [DBProtocolID] in table 'DBProtocols'
+ALTER TABLE [dbo].[DBProtocols]
+ADD CONSTRAINT [PK_DBProtocols]
+    PRIMARY KEY CLUSTERED ([DBProtocolID] ASC);
+GO
+
+-- Creating primary key on [DRFID] in table 'DRFNICoEs'
+ALTER TABLE [dbo].[DRFNICoEs]
+ADD CONSTRAINT [PK_DRFNICoEs]
+    PRIMARY KEY CLUSTERED ([DRFID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'SOAPs'
+ALTER TABLE [dbo].[SOAPs]
+ADD CONSTRAINT [PK_SOAPs]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ImagingID] in table 'Imagings'
+ALTER TABLE [dbo].[Imagings]
+ADD CONSTRAINT [PK_Imagings]
+    PRIMARY KEY CLUSTERED ([ImagingID] ASC);
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- Creating foreign key on [ID] in table 'Consents'
+ALTER TABLE [dbo].[Consents]
+ADD CONSTRAINT [FK__Consent__ID__49C3F6B7]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__Consent__ID__49C3F6B7'
+CREATE INDEX [IX_FK__Consent__ID__49C3F6B7]
+ON [dbo].[Consents]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'Deps'
+ALTER TABLE [dbo].[Deps]
+ADD CONSTRAINT [FK__Dep__ID__6FE99F9F]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__Dep__ID__6FE99F9F'
+CREATE INDEX [IX_FK__Dep__ID__6FE99F9F]
+ON [dbo].[Deps]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'Deployments'
+ALTER TABLE [dbo].[Deployments]
+ADD CONSTRAINT [FK__Deployment__ID__2BFE89A6]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__Deployment__ID__2BFE89A6'
+CREATE INDEX [IX_FK__Deployment__ID__2BFE89A6]
+ON [dbo].[Deployments]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'DBProtocols'
+ALTER TABLE [dbo].[DBProtocols]
+ADD CONSTRAINT [FK_PersonOrder]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonOrder'
+CREATE INDEX [IX_FK_PersonOrder]
+ON [dbo].[DBProtocols]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'DRFNICoEs'
+ALTER TABLE [dbo].[DRFNICoEs]
+ADD CONSTRAINT [FK__DRFNICoE__ID__160F4887]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__DRFNICoE__ID__160F4887'
+CREATE INDEX [IX_FK__DRFNICoE__ID__160F4887]
+ON [dbo].[DRFNICoEs]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'Imagings'
+ALTER TABLE [dbo].[Imagings]
+ADD CONSTRAINT [FK__Imaging__ID__797309D9]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__Imaging__ID__797309D9'
+CREATE INDEX [IX_FK__Imaging__ID__797309D9]
+ON [dbo].[Imagings]
+    ([ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'Imagings'
+ALTER TABLE [dbo].[Imagings]
+ADD CONSTRAINT [FK__Imaging__ID__7A672E12]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[Persons]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK__Imaging__ID__7A672E12'
+CREATE INDEX [IX_FK__Imaging__ID__7A672E12]
+ON [dbo].[Imagings]
+    ([ID]);
+GO
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------

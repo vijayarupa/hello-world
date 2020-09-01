@@ -1,0 +1,330 @@
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[Persons]    Script Date: 5/20/2020 5:20:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Persons](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[LastName] [varchar](255) NOT NULL,
+	[FirstName] [varchar](255) NULL,
+	[Age] [int] NULL,
+	[Email] [varchar](255) NULL,
+	[City] [varchar](255) NULL,
+	[State] [varchar](255) NULL,
+ CONSTRAINT [PK_Persons] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ 
+---------------------------------------------------------------------------
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[Consent]    Script Date: 5/20/2020 5:23:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Consent](
+	[ConsentID] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[ConID] [int] NOT NULL,
+	[StudyType] [nvarchar](50) NOT NULL,
+	[SType] [nvarchar](50) NOT NULL,
+	[ScreenedDate] [datetime] NOT NULL,
+	[Eligible] [bit] NOT NULL,
+	[EligibilityComments] [varchar](max) NULL,
+	[ReasonForExclusion] [varchar](max) NULL,
+	[ApproachedDate] [datetime] NOT NULL,
+	[ConsentDate] [datetime] NOT NULL,
+	[Comments] [varchar](max) NULL,
+	[Consented] [bit] NOT NULL,
+	[Declined] [bit] NOT NULL,
+	[Withdraw] [bit] NOT NULL,
+	[ConsentComments] [varchar](max) NULL,
+	[DatePhoned] [datetime] NOT NULL,
+	[FollowupComments] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ConsentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Consent]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+
+--------------------------------------------------------------------------------------------
+C:\TBI\SQL
+-------------------------------------------------------------------------------------------
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[Dep]    Script Date: 5/20/2020 5:24:27 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Dep](
+	[DID] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[DeID] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+	[InjuryType] [nvarchar](50) NOT NULL,
+	[IType] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Dep]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+
+
+-----------------------------------------------------------------------------------------------
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[Deployment]    Script Date: 5/20/2020 5:24:49 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Deployment](
+	[DeploymentID] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[DepID] [int] NOT NULL,
+	[Month] [nvarchar](50) NOT NULL,
+	[Year] [nvarchar](50) NOT NULL,
+	[Duration] [nvarchar](50) NOT NULL,
+	[Location] [nvarchar](250) NULL,
+	[InjuryDate] [datetime] NOT NULL,
+	[DateComment] [datetime] NOT NULL,
+	[OIFOEF] [nvarchar](50) NOT NULL,
+	[InjuryType] [nvarchar](50) NOT NULL,
+	[IType] [varchar](max) NULL,
+	[Loc] [bit] NOT NULL,
+	[LocDuration] [nvarchar](150) NULL,
+	[PTA] [nvarchar](50) NULL,
+	[PTADuration] [nvarchar](150) NULL,
+	[AOC] [bit] NOT NULL,
+	[AOCDuration] [nvarchar](150) NULL,
+	[MostSignificant] [nvarchar](150) NULL,
+	[SiteOfInjury] [varchar](max) NULL,
+	[Background] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DeploymentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Deployment]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+
+-----------------------------------------------------------------------------------------
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[DRFNICoE]    Script Date: 5/20/2020 5:25:08 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DRFNICoE](
+	[DRFID] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[DID] [int] NOT NULL,
+	[Name] [nvarchar](250) NOT NULL,
+	[ContactNumber] [nvarchar](50) NOT NULL,
+	[Department] [nvarchar](250) NOT NULL,
+	[EmailAddress] [nvarchar](255) NULL,
+	[DescofDataReq] [nvarchar](max) NULL,
+	[Purpose] [bit] NOT NULL,
+	[PProtocolNumber] [nvarchar](250) NULL,
+	[PProtocolName] [nvarchar](250) NULL,
+	[FormateRequired] [bit] NOT NULL,
+	[FormateRequired1] [nvarchar](250) NULL,
+	[DataIdentifiers] [nvarchar](250) NULL,
+	[DataAnalysis] [nvarchar](250) NULL,
+	[Signature] [nvarchar](250) NULL,
+	[SDate] [datetime] NOT NULL,
+	[ARApprovedBy] [nvarchar](250) NULL,
+	[ARSignature] [nvarchar](250) NULL,
+	[Section] [nvarchar](50) NOT NULL,
+	[RIPDateReceived] [datetime] NOT NULL,
+	[RIPDateReturned] [datetime] NOT NULL,
+	[RIPComments] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DRFID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[DRFNICoE]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+ALTER TABLE [dbo].[DRFNICoE]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+
+------------------------------------------------------------------------
+ USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[Imaging]    Script Date: 5/20/2020 5:23:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Imaging](
+	[ImagingID] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[ImagID] [int] NOT NULL,
+	[ImageDate] [datetime] NULL,
+	[Type] [nvarchar](50) NOT NULL,
+	[IType] [varchar](max) NULL,
+	[Location] [nvarchar](max) NULL,
+	[ScanAtNICoE] [bit] NOT NULL,
+	[UsableImage] [bit] NOT NULL,
+	[Findings] [bit] NOT NULL,
+	[FindingsNote] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ImagingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Imaging]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+
+ALTER TABLE [dbo].[Imaging]  WITH CHECK ADD FOREIGN KEY([ID])
+REFERENCES [dbo].[Persons] ([ID])
+GO
+USE [TBIEmployee]
+GO
+----------------------------------------------------------------------------------------------------
+
+/****** Object:  Table [dbo].[Mood]    Script Date: 5/20/2020 5:22:06 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Mood](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Mood] [nvarchar](50) NULL,
+	[Description] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Mood] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+USE [TBIEmployee]
+GO
+
+/****** Object:  Table [dbo].[SOAP]    Script Date: 5/20/2020 5:21:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SOAP](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[DTime] [datetime] NOT NULL,
+	[SessionNumber] [varchar](max) NOT NULL,
+	[LastName] [varchar](max) NOT NULL,
+	[FirstName] [varchar](max) NOT NULL,
+	[MiddleName] [varbinary](max) NULL,
+	[Age] [int] NOT NULL,
+	[MilitaryAffiliation] [varchar](max) NOT NULL,
+	[Rank] [nvarchar](max) NULL,
+	[Service] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[Phone] [nvarchar](max) NULL,
+	[CaseManager] [nvarchar](max) NULL,
+	[CurrentLivingSituation] [nvarchar](max) NULL,
+	[LearningStyle] [nvarchar](max) NULL,
+	[BarrierstoLearning] [nvarchar](50) NULL,
+	[PatientGoal] [nvarchar](50) NULL,
+	[FallRisks] [nvarchar](50) NULL,
+	[Precautions] [nvarchar](max) NULL,
+	[OtherTherapiesAttended] [nvarchar](max) NULL,
+	[History] [nvarchar](max) NULL,
+	[FamilyBackgroundSocialSupport] [nvarchar](max) NULL,
+	[Highestlevelofeducation] [nvarchar](max) NULL,
+	[EducationPerformance] [nvarchar](max) NULL,
+	[LearningdisabilityADHD] [nvarchar](max) NULL,
+	[Plansforfutureeducation] [nvarchar](max) NULL,
+	[LeisureHistory] [nvarchar](max) NULL,
+	[HPIReasonforReferral] [nvarchar](max) NULL,
+	[TreatingClinician] [nvarchar](max) NULL,
+	[SubjReportpreorpostveteranspainscale] [nvarchar](max) NULL,
+	[Hoursofsleep] [nvarchar](max) NULL,
+	[Sleepquality] [nvarchar](max) NULL,
+	[ParticipantReportedFeelingsaboutDay] [nvarchar](max) NULL,
+	[HygieneAppearance] [nvarchar](max) NULL,
+	[Insigh] [nvarchar](max) NULL,
+	[Judgment] [nvarchar](max) NULL,
+	[EyeContact] [nvarchar](max) NULL,
+	[SpeechPatterns] [nvarchar](max) NULL,
+	[Affect] [nvarchar](max) NULL,
+	[ThoughtPattern] [nvarchar](max) NULL,
+	[Comments] [nvarchar](max) NULL,
+	[ODuration] [nvarchar](max) NULL,
+	[OCPTcode] [nvarchar](max) NULL,
+	[CREVIEW] [nvarchar](max) NULL,
+	[CNEW] [nvarchar](max) NULL,
+	[CmdReview] [nvarchar](max) NULL,
+	[CmdNew] [nvarchar](max) NULL,
+	[Environment] [nvarchar](max) NULL,
+	[Conditions] [nvarchar](max) NULL,
+	[Educationprovided] [nvarchar](max) NULL,
+	[ObjComments] [nvarchar](max) NULL,
+	[Assessment] [nvarchar](max) NULL,
+	[Plan] [nvarchar](max) NULL,
+ CONSTRAINT [PK_SOAP] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
